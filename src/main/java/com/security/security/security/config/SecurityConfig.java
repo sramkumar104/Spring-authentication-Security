@@ -14,11 +14,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/css/**", "/index").permitAll()		
-				.antMatchers("/user/**").hasRole("USER")			
-				.and()
-			.formLogin()
-				.loginPage("/login").failureUrl("/login-error");	
+				.antMatchers("/","/css/**", "/index").permitAll();		
+				
+		http.authorizeRequests().anyRequest().fullyAuthenticated().and().httpBasic().and().csrf().disable();
+				http.formLogin()
+				.loginPage("/login").loginProcessingUrl("/login").usernameParameter("userName").passwordParameter("pass").failureUrl("/login").successForwardUrl("/dashboard");
+				
+				http.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 	}
 
 	@Autowired

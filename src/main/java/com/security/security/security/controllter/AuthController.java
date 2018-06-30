@@ -1,5 +1,8 @@
 package com.security.security.security.controllter;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,5 +17,9 @@ public class AuthController {
 	public String dashboard() {
 		
 		return "dashboard";
+	}
+	@RequestMapping(value="/login")
+	public String login(HttpServletRequest request,HttpServletResponse response) {
+		return "login";
 	}
 }
